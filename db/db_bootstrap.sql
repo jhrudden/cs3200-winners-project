@@ -126,7 +126,7 @@ INSERT INTO Authors
 VALUES
   ('Mark', 'Morford'),
   ('Richard', 'Wright'),
-  ('Carlo', 'D\'este');
+  ("Carlo", "D\'este");
 
 # ---------------- Curators ----------------
 insert into Curators (firstName, lastName, email) values ('Stavros', 'Ashbey', 'sashbey0@mediafire.com');
