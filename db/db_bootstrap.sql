@@ -1,8 +1,20 @@
-CREATE DATABASE winnersDB;
+-- This file is to bootstrap a database for the CS3200 project. 
+
+-- Create a new database.  You can change the name later.  You'll
+-- need this name in the FLASK API file(s),  the AppSmith 
+-- data source creation.
+CREATE DATABASE `winnersDB`;
+
+-- Via the Docker Compose file, a special user called webapp will 
+-- be created in MySQL. We are going to grant that user 
+-- all privilages to the new database we just created. 
+-- TODO: If you changed the name of the database above, you need 
+-- to change it here too.
 grant all privileges on winnersDB.* to 'webapp'@'%';
 flush privileges;
 
-USE winnersDB;
+USE `winnersDB`;
+
 CREATE TABLE Authors (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   firstName VARCHAR(255),
