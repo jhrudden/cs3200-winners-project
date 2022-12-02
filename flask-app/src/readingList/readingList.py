@@ -8,16 +8,27 @@ readingList = Blueprint('readingList', __name__)
 # Get the readinglist table from the DB
 # need book isbn title author(name) year
 # need reader userid bought(?)
-@readingList.route('/readingList', methods=['GET'])
-def get_readingList():
+@readingList.route('/reading-list/<reader_id>', methods=['GET'])
+def get_readingList(reader_id):
     cursor = db.get_db().cursor()
     cursor.execute("""
-        SELECT b.ISBN, b.title, b.year, a.firstName as AuthorFirstName, 
-        rl.reader_id, r.firstName as ReaderFirstName
-        FROM Books as b JOIN Authors as a ON b.writer_id=a.id
-        JOIN Reading_List as rl ON rl.book_id=b.ISBN
-        JOIN Readers as r ON rl.reader_id=r.id
-        """)
+        SELECT B.ISBN,
+               B.title,
+               B.year,
+               CONCAT(A.firstName, ' ', A.lastName) as authorName,
+               RL.reader_id,
+               CONCAT(R.firstName, ' ', R.lastName) as readerName,
+               (BB.book_id is not NULL) as 'bought?',
+                RA.score,
+                RA.comments
+        FROM Reading_List as RL
+        JOIN Readers R on R.id = RL.reader_id
+        JOIN Books B on RL.book_id = B.ISBN
+        JOIN Authors A on B.writer_id = A.id
+        LEFT OUTER JOIN Ratings as RA on RA.book_id = RL.book_id and RA.reader_id = RL.reader_id
+        LEFT OUTER JOIN Books_Bought BB on RL.reader_id = BB.reader_id and BB.book_id = RL.book_id
+        where RL.reader_id = %s
+""", (reader_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

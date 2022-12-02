@@ -37,7 +37,7 @@ def create_app():
     # app.register_blueprint(customers,   url_prefix='/classic')
     # app.register_blueprint(products,    url_prefix='/classic')
     app.register_blueprint(authors,    url_prefix='/authors')
-    app.register_blueprint(readingList,    url_prefix='/readingList')
+    app.register_blueprint(readingList,    url_prefix='/rl')
     app.register_blueprint(readers, url_prefix='/readers')
 
     return app
