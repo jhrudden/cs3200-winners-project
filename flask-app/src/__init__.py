@@ -31,6 +31,7 @@ def create_app():
     from src.authors.authors import authors
     from src.readingList.readingList import readingList
     from src.readers.readers import readers
+    from src.login.login import login
 
     # Register the routes that we just imported so they can be properly handled
     # app.register_blueprint(views,       url_prefix='/classic')
@@ -39,5 +40,6 @@ def create_app():
     app.register_blueprint(authors,    url_prefix='/authors')
     app.register_blueprint(readingList,    url_prefix='/rl')
     app.register_blueprint(readers, url_prefix='/readers')
+    app.register_blueprint(login, url_prefix='/login')
 
     return app
