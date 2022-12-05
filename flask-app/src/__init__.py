@@ -16,7 +16,7 @@ def create_app():
 
     # these are for the DB object to be able to connect to MySQL. 
     app.config['MYSQL_DATABASE_USER'] = 'webapp'
-    app.config['MYSQL_DATABASE_PASSWORD'] = open('/secrets/db_password.txt').readline()
+    app.config['MYSQL_DATABASE_PASSWORD'] = 'admin'
     app.config['MYSQL_DATABASE_HOST'] = 'db'
     app.config['MYSQL_DATABASE_PORT'] = 3306
     app.config['MYSQL_DATABASE_DB'] = 'winnersDB'  # Change this to your DB name
@@ -29,7 +29,6 @@ def create_app():
     # from src.customers.customers import customers
     # from src.products.products  import products
     from src.authors.authors import authors
-    from src.readingList.readingList import readingList
     from src.readers.readers import readers
     from src.login.login import login
 
@@ -38,8 +37,7 @@ def create_app():
     # app.register_blueprint(customers,   url_prefix='/classic')
     # app.register_blueprint(products,    url_prefix='/classic')
     app.register_blueprint(authors,    url_prefix='/authors')
-    app.register_blueprint(readingList,    url_prefix='/rl')
-    app.register_blueprint(readers, url_prefix='/readers')
-    app.register_blueprint(login, url_prefix='/login')
+    app.register_blueprint(readers,    url_prefix='/readers')
+    app.register_blueprint(login,      url_prefix='/login')
 
     return app

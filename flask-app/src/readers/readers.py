@@ -24,10 +24,28 @@ def add_review():
 
 # Get all authors from the DB
 # TODO: readingList endpoint here
-@readers.route('/readingList', methods=['GET'])
-def get_authors():
+@readers.route('/reading-list/<readerID>', methods=['GET'])
+def get_readingList(readerID):
+    reader_id = int(readerID)
     cursor = db.get_db().cursor()
-    cursor.execute('select id, firstName, lastName from Authors')
+    cursor.execute("""
+        SELECT B.ISBN,
+               B.title,
+               B.year,
+               CONCAT(A.firstName, ' ', A.lastName) as authorName,
+               RL.reader_id,
+               CONCAT(R.firstName, ' ', R.lastName) as readerName,
+               (BB.book_id is not NULL) as 'bought?',
+                RA.score,
+                RA.comments
+        FROM Reading_List as RL
+        JOIN Readers R on R.id = RL.reader_id
+        JOIN Books B on RL.book_id = B.ISBN
+        JOIN Authors A on B.writer_id = A.id
+        LEFT OUTER JOIN Ratings as RA on RA.book_id = RL.book_id and RA.reader_id = RL.reader_id
+        LEFT OUTER JOIN Books_Bought BB on RL.reader_id = BB.reader_id and BB.book_id = RL.book_id
+        where RL.reader_id = %s
+""", (reader_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -37,4 +55,4 @@ def get_authors():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
-    # return f'<h1>Getting all the authors.</h1>'
+
