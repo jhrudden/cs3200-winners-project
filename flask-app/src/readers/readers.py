@@ -56,3 +56,33 @@ def get_readingList(readerID):
     the_response.mimetype = 'application/json'
     return the_response
 
+@readers.route('/book-list/<readerID>', methods=['GET'])
+def get_book_list(readerID):
+    reader_id = int(readerID)
+    cursor = db.get_db().cursor()
+    cursor.execute("""
+        SELECT B.ISBN,
+               B.title,
+               B.year,
+               CONCAT(A.firstName, ' ', A.lastName) as authorName,
+               (BB.date_bought IS NOT NULL) as 'bought?',
+               (RL.reader_id is NOT NULL) as 'saved?',
+               RA.score as review
+        FROM Books B
+        LEFT OUTER JOIN (SELECT * FROM Reading_List where reader_id = %s) as RL
+            on RL.book_id = B.ISBN
+        LEFT OUTER JOIN (SELECT * FROM Books_Bought where reader_id = %s) as BB
+            on BB.book_id = B.ISBN
+        LEFT OUTER JOIN (SELECT * FROM Ratings where reader_id = %s) as RA
+            on RA.book_id = B.ISBN
+        JOIN Authors A on A.id = B.writer_id;
+""", (reader_id, reader_id, reader_id))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
