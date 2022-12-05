@@ -171,16 +171,16 @@ INSERT INTO Books
 VALUES
   ('0195153448', 2002, 1, 'Classical Mythology', 'http://images.amazon.com/images/P/0195153448.01.MZZZZZZZ.jpg', 'Oxford University Press', 2),
   ('0002005018', 2001, 2, 'Clara Callan', 'http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg', 'HarperFlamingo Canada', 1),
-  ('0060973129', 1991, 3, 'Decision in Normandy', 'http://images.amazon.com/images/P/0060973129.01.MZZZZZZZ.jpg', 'HarperPerennial', 3);
-  ('0393045218', 1999, 4, 'The Mummies of Urumchi', 'http://images.amazon.com/images/P/0393045218.01.MZZZZZZZ.jpg', 'W. W. Norton &amp; Company', 1);
-  ('0399135782', 1999, 4, 'The Kitchen Gods Wife', 'http://images.amazon.com/images/P/0399135782.01.MZZZZZZZ.jpg', 'Putnam Pub Group', 1);
-  ('0425176428', 1999, 4, 'What If?: The Worlds Foremost Military Historians Imagine What Might Have Been', 'http://images.amazon.com/images/P/0425176428.01.MZZZZZZZ.jpg', 'Berkley Publishing Group', 4);
-  ('0671870432', 1999, 4, 'PLEADING GUILTY', 'http://images.amazon.com/images/P/0671870432.01.MZZZZZZZ.jpg', 'Audioworks', 4);
-  ('0679425608', 1999, 4, 'Under the Black Flag: The Romance and the Reality of Life Among the Pirates', 'http://images.amazon.com/images/P/0679425608.01.MZZZZZZZ.jpg', 'Random House', 3);
-  ('074322678X', 1999, 4, 'Where Youll Find Me: And Other Stories', 'http://images.amazon.com/images/P/074322678X.01.MZZZZZZZ.jpg', 'Scribner', 6);
-  ('0771074670', 1999, 4, 'Nights Below Station Street', 'http://images.amazon.com/images/P/0771074670.01.MZZZZZZZ.jpg', 'Emblem Editions', 6);
-  ('080652121X', 1999, 4, 'Hitlers Secret Bankers: The Myth of Swiss Neutrality During the Holocaust', 'http://images.amazon.com/images/P/080652121X.01.MZZZZZZZ.jpg', 'Citadel Press', 3);
-  ('0887841740', 1999, 4, 'The Middle Stories', 'http://images.amazon.com/images/P/0887841740.01.MZZZZZZZ.jpg', 'House of Anansi Press', 6);
+  ('0060973129', 1991, 3, 'Decision in Normandy', 'http://images.amazon.com/images/P/0060973129.01.MZZZZZZZ.jpg', 'HarperPerennial', 3),
+  ('0393045218', 1999, 4, 'The Mummies of Urumchi', 'http://images.amazon.com/images/P/0393045218.01.MZZZZZZZ.jpg', 'W. W. Norton &amp; Company', 1),
+  ('0399135782', 1999, 4, 'The Kitchen Gods Wife', 'http://images.amazon.com/images/P/0399135782.01.MZZZZZZZ.jpg', 'Putnam Pub Group', 1),
+  ('0425176428', 1999, 4, 'What If?: The Worlds Foremost Military Historians Imagine What Might Have Been', 'http://images.amazon.com/images/P/0425176428.01.MZZZZZZZ.jpg', 'Berkley Publishing Group', 4),
+  ('0671870432', 1999, 4, 'PLEADING GUILTY', 'http://images.amazon.com/images/P/0671870432.01.MZZZZZZZ.jpg', 'Audioworks', 4),
+  ('0679425608', 1999, 4, 'Under the Black Flag: The Romance and the Reality of Life Among the Pirates', 'http://images.amazon.com/images/P/0679425608.01.MZZZZZZZ.jpg', 'Random House', 3),
+  ('074322678X', 1999, 4, 'Where Youll Find Me: And Other Stories', 'http://images.amazon.com/images/P/074322678X.01.MZZZZZZZ.jpg', 'Scribner', 6),
+  ('0771074670', 1999, 4, 'Nights Below Station Street', 'http://images.amazon.com/images/P/0771074670.01.MZZZZZZZ.jpg', 'Emblem Editions', 6),
+  ('080652121X', 1999, 4, 'Hitlers Secret Bankers: The Myth of Swiss Neutrality During the Holocaust', 'http://images.amazon.com/images/P/080652121X.01.MZZZZZZZ.jpg', 'Citadel Press', 3),
+  ('0887841740', 1999, 4, 'The Middle Stories', 'http://images.amazon.com/images/P/0887841740.01.MZZZZZZZ.jpg', 'House of Anansi Press', 6),
   ('1552041778', 1999, 4, 'Jane Doe', 'http://images.amazon.com/images/P/1552041778.01.MZZZZZZZ.jpg', 'Mira Books', 3);
 
 
