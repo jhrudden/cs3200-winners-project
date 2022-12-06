@@ -3,7 +3,7 @@ import json
 from src import db
 from src.helpers.helpers import make_get_request, check_if_exists
 
-sellers = Blueprint('readers', __name__)
+sellers = Blueprint('sellers', __name__)
 
 
 # Get all authors from the DB
@@ -82,8 +82,8 @@ sellers = Blueprint('readers', __name__)
 #     """
 #     return make_get_request(query)
 
-@sellers.route('/addReview', methods=['POST'])
-def add_review():
+@sellers.route('/addBook', methods=['POST'])
+def add_book():
     cursor = db.get_db().cursor()
     isbn = request.form['isbn']
     title = request.form['title']
@@ -93,25 +93,25 @@ def add_review():
     genre = request.form['genre']
     publisher = request.form['publisher']
     seller_id = request.form['seller_id']
-    genreQuery = f'SELECT * FROM Genre WHERE name = {genre};'
+    genreQuery = f'SELECT * FROM Genre WHERE name = \'{genre}\';'
     genreId = check_if_exists(genreQuery, 'id')
-    authorQuery = f'SELECT * FROM Genre WHERE firstName = {authFName} and lastName = {authLName};'
+    authorQuery = f'SELECT * FROM Authors WHERE firstName = \'{authFName}\' and lastName = \'{authLName}\';'
     writerId = check_if_exists(authorQuery, 'id')
     if genreId is None:
-        cursor.execute(f'INSERT INTO Genre (name) VALUES ({genre});')
+        cursor.execute(f'INSERT INTO Genre (name) VALUES (\'{genre}\');')
         genreId = check_if_exists(genreQuery, 'id') # lazy coding lol
     if writerId is None:
-        cursor.execute(f'INSERT INTO Authors (firstName, lastName) VALUES ({authFName}, {authLName});')
+        cursor.execute(f'INSERT INTO Authors (firstName, lastName) VALUES (\'{authFName}\', \'{authLName}\');')
         writerId = check_if_exists(authorQuery, 'id')
     cursor.execute(f"""
         INSERT INTO Books
           (ISBN, year, writer_id, title, publisher_name, genre_id, visible)
         VALUES
-          (\'{isbn}\', {year}, {writerId}, \'{title}\', \'{publisher}\', {genreId}, false),
+          (\'{isbn}\', {year}, {writerId}, \'{title}\', \'{publisher}\', {genreId}, false);
     """)
     cursor.execute(f"""
         INSERT INTO Book_Submissions (book_id, seller_id, accepted)
-        VALUES (\'{isbn}\', {seller_id}, false)
+        VALUES (\'{isbn}\', {seller_id}, false);
     """)
     db.get_db().commit()
     the_response = make_response()
