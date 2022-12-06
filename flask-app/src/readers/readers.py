@@ -13,11 +13,12 @@ def add_review():
     book_id = request.form['book_id']
     reader_id = request.form['reader_id']
     cursor.execute(f"""
-    INSERT INTO Ratings
+    REPLACE INTO Ratings
       (book_id, reader_id, score, comments)
     VALUES
-      (\'{book_id}\', {reader_id}, {score}, \'{comments}\');
+      (\"{book_id}\", {reader_id}, {score}, \"{comments}\");
     """)
+    db.get_db().commit()
     the_response = make_response()
     the_response.status_code = 200
     return the_response
@@ -32,6 +33,7 @@ def get_readingList(readerID):
         SELECT B.ISBN,
                B.title,
                B.year,
+               B.publisher_name as Publisher,
                CONCAT(A.firstName, ' ', A.lastName) as authorName,
                RL.reader_id,
                CONCAT(R.firstName, ' ', R.lastName) as readerName,
@@ -64,6 +66,7 @@ def get_book_list(readerID):
         SELECT B.ISBN,
                B.title,
                B.year,
+               B.publisher_name as Publisher,
                CONCAT(A.firstName, ' ', A.lastName) as authorName,
                (BB.date_bought IS NOT NULL) as 'bought?',
                (RL.reader_id is NOT NULL) as 'saved?',
