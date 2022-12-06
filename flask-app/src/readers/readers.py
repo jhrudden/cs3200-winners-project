@@ -65,7 +65,8 @@ def get_book_list(readerID):
             on BB.book_id = B.ISBN
         LEFT OUTER JOIN (SELECT * FROM Ratings where reader_id = {reader_id}) as RA
             on RA.book_id = B.ISBN
-        JOIN Authors A on A.id = B.writer_id;
+        JOIN Authors A on A.id = B.writer_id
+        where B.visible = true;
     """
     return make_get_request(query)
 
@@ -85,11 +86,11 @@ def get_recommendations(readerID):
            RA.score as review
         FROM Recommendations Rec
         Join Books B on Rec.book_id = B.ISBN
-        LEFT OUTER JOIN (SELECT * FROM Reading_List where reader_id = 3) as RL
+        LEFT OUTER JOIN (SELECT * FROM Reading_List where reader_id = {reader_id}) as RL
             on RL.book_id = B.ISBN
-        LEFT OUTER JOIN (SELECT * FROM Books_Bought where reader_id = 3) as BB
+        LEFT OUTER JOIN (SELECT * FROM Books_Bought where reader_id = {reader_id}) as BB
             on BB.book_id = B.ISBN
-        LEFT OUTER JOIN (SELECT * FROM Ratings where reader_id = 3) as RA
+        LEFT OUTER JOIN (SELECT * FROM Ratings where reader_id = {reader_id}) as RA
             on RA.book_id = B.ISBN
         JOIN Authors A on A.id = B.writer_id;
     """
