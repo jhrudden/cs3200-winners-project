@@ -114,7 +114,7 @@ def add_review():
     return the_response
 
 @readers.route('/buy-or-sell', methods=['POST'])
-def add_review():
+def buy_or_sell():
     cursor = db.get_db().cursor()
     reader_id = int(request.form['reader_id'])
     book_id = request.form['book_id']
