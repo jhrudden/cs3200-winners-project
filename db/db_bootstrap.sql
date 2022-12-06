@@ -34,6 +34,7 @@ CREATE TABLE Books (
   img_url VARCHAR(255),
   publisher_name VARCHAR(255),
   genre_id INT NOT NULL,
+  visible BOOLEAN DEFAULT TRUE, 
   CONSTRAINT book_fk1 FOREIGN KEY (writer_id) REFERENCES Authors(id)
     ON UPDATE cascade ON DELETE restrict,
   CONSTRAINT book_fk2 FOREIGN KEY (genre_id) REFERENCES Genre(id)

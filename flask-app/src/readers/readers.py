@@ -46,7 +46,7 @@ def get_readingList(readerID):
         JOIN Authors A on B.writer_id = A.id
         LEFT OUTER JOIN Ratings as RA on RA.book_id = RL.book_id and RA.reader_id = RL.reader_id
         LEFT OUTER JOIN Books_Bought BB on RL.reader_id = BB.reader_id and BB.book_id = RL.book_id
-        where RL.reader_id = %s
+        where RL.reader_id = %s;
 """, (reader_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -78,7 +78,8 @@ def get_book_list(readerID):
             on BB.book_id = B.ISBN
         LEFT OUTER JOIN (SELECT * FROM Ratings where reader_id = %s) as RA
             on RA.book_id = B.ISBN
-        JOIN Authors A on A.id = B.writer_id;
+        JOIN Authors A on A.id = B.writer_id
+        where B.visible = true;
 """, (reader_id, reader_id, reader_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
