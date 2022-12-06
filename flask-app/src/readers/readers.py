@@ -5,24 +5,6 @@ from src import db
 
 readers = Blueprint('readers', __name__)
 
-@readers.route('/addReview', methods=['POST'])
-def add_review():
-    cursor = db.get_db().cursor()
-    score = request.form['score']
-    comments = request.form['comments']
-    book_id = request.form['book_id']
-    reader_id = request.form['reader_id']
-    cursor.execute(f"""
-    REPLACE INTO Ratings
-      (book_id, reader_id, score, comments)
-    VALUES
-      (\"{book_id}\", {reader_id}, {score}, \"{comments}\");
-    """)
-    db.get_db().commit()
-    the_response = make_response()
-    the_response.status_code = 200
-    return the_response
-
 def make_get_request(query: str) -> Response:
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -112,4 +94,46 @@ def get_recommendations(readerID):
         JOIN Authors A on A.id = B.writer_id;
     """
     return make_get_request(query)
+
+@readers.route('/addReview', methods=['POST'])
+def add_review():
+    cursor = db.get_db().cursor()
+    score = request.form['score']
+    comments = request.form['comments']
+    book_id = request.form['book_id']
+    reader_id = request.form['reader_id']
+    cursor.execute(f"""
+    REPLACE INTO Ratings
+      (book_id, reader_id, score, comments)
+    VALUES
+      (\"{book_id}\", {reader_id}, {score}, \"{comments}\");
+    """)
+    db.get_db().commit()
+    the_response = make_response()
+    the_response.status_code = 200
+    return the_response
+
+@readers.route('/buy-or-sell', methods=['POST'])
+def add_review():
+    cursor = db.get_db().cursor()
+    reader_id = int(request.form['reader_id'])
+    book_id = request.form['book_id']
+    buy_status = cursor.execute(f"""SELECT * FROM Books_Bought 
+            where reader_id = {reader_id} and book_id = {book_id};
+    """).fetchall()
+    if len(buy_status):
+        cursor.execute(f"""
+        INSERT INTO Books_Bought
+          (book_id, reader_id)
+        VALUES
+          (\"{book_id}\", {reader_id});
+        """)
+    else:
+        cursor.execute(f""" DELETE FROM Books_Bought 
+                WHERE book_id = {book_id} and reader_id = {reader_id};
+        """)
+    db.get_db().commit()
+    the_response = make_response()
+    the_response.status_code = 200
+    return the_response
 
