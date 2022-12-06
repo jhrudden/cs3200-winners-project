@@ -1,26 +1,11 @@
 from flask import Blueprint, Response, request, jsonify, make_response, current_app
 import json
 from src import db
+from src.helpers.helpers import make_get_request
 
 
 readers = Blueprint('readers', __name__)
 
-def make_get_request(query: str) -> Response:
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-
-# Get all authors from the DB
 # TODO: readingList endpoint here
 @readers.route('/reading-list/<readerID>', methods=['GET'])
 def get_readingList(readerID):
