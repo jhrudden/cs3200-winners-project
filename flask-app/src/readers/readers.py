@@ -12,17 +12,14 @@ def get_readingList(readerID):
     reader_id = int(readerID)
     query = f"""
         SELECT B.ISBN,
-               B.title,
-               B.year,
+               B.title as Title,
+               B.year as Year,
                B.publisher_name as Publisher,
-               CONCAT(A.firstName, ' ', A.lastName) as authorName,
-               RL.reader_id,
-               CONCAT(R.firstName, ' ', R.lastName) as readerName,
-               (BB.book_id is not NULL) as 'bought?',
-                RA.score,
-                RA.comments
+               CONCAT(A.firstName, ' ', A.lastName) as Author,
+               (BB.book_id is not NULL) as 'Bought?',
+                RA.score as Rating,
+                RA.comments as Review
         FROM Reading_List as RL
-        JOIN Readers R on R.id = RL.reader_id
         JOIN Books B on RL.book_id = B.ISBN
         JOIN Authors A on B.writer_id = A.id
         LEFT OUTER JOIN Ratings as RA on RA.book_id = RL.book_id and RA.reader_id = RL.reader_id
@@ -36,13 +33,13 @@ def get_book_list(readerID):
     reader_id = int(readerID)
     query = f"""
         SELECT B.ISBN,
-               B.title,
-               B.year,
+               B.title as Title,
+               B.year as Year,
                B.publisher_name as Publisher,
-               CONCAT(A.firstName, ' ', A.lastName) as authorName,
-               (BB.date_bought IS NOT NULL) as 'bought?',
-               (RL.reader_id is NOT NULL) as 'saved?',
-               RA.score as review
+               CONCAT(A.firstName, ' ', A.lastName) as Author,
+               (BB.date_bought IS NOT NULL) as 'Bought?',
+               (RL.reader_id is NOT NULL) as 'Saved?',
+               RA.score as Review
         FROM Books B
         LEFT OUTER JOIN (SELECT * FROM Reading_List where reader_id = {reader_id}) as RL
             on RL.book_id = B.ISBN
@@ -62,13 +59,13 @@ def get_recommendations(readerID):
     query = f"""
         SELECT 
            DISTINCT (B.ISBN),
-           B.title,
-           B.year,
+           B.title as Title,
+           B.year as Year,
            B.publisher_name as Publisher,
-           CONCAT(A.firstName, ' ', A.lastName) as authorName,
-           (BB.date_bought IS NOT NULL) as 'bought?',
-           (RL.reader_id is NOT NULL) as 'saved?',
-           RA.score as review
+           CONCAT(A.firstName, ' ', A.lastName) as Author,
+           (BB.date_bought IS NOT NULL) as 'Bought?',
+           (RL.reader_id is NOT NULL) as 'Saved?',
+           RA.score as Review
         FROM Recommendations Rec
         Join Books B on Rec.book_id = B.ISBN
         LEFT OUTER JOIN (SELECT * FROM Reading_List where reader_id = {reader_id}) as RL
