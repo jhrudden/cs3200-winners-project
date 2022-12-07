@@ -1,5 +1,7 @@
 from flask import Blueprint, Response, request, jsonify, make_response, current_app
 import json
+from datetime import datetime
+
 from src import db
 from src.helpers.helpers import make_get_request
 
@@ -96,24 +98,29 @@ def add_review():
     the_response.status_code = 200
     return the_response
 
-@readers.route('/buy-or-sell', methods=['POST'])
+@readers.route('/buy-or-sell', methods=['PUT'])
 def buy_or_sell():
     cursor = db.get_db().cursor()
     reader_id = int(request.form['reader_id'])
     book_id = request.form['book_id']
-    buy_status = cursor.execute(f"""SELECT * FROM Books_Bought 
+    dt_now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    current_app.logger.info(f"buy_or_sell({reader_id}, {book_id}) -> NONE")
+    cursor.execute(f"""SELECT * FROM Books_Bought 
             where reader_id = {reader_id} and book_id = {book_id};
-    """).fetchall()
-    if len(buy_status):
+    """)
+    buy_status = cursor.fetchall();
+    current_app.logger.info(f"book is {buy_status}")
+    if not(buy_status):
         cursor.execute(f"""
-        INSERT INTO Books_Bought
-          (book_id, reader_id)
-        VALUES
-          (\"{book_id}\", {reader_id});
+            INSERT INTO Books_Bought
+              (book_id, reader_id, date_bought)
+            VALUES
+              (\"{book_id}\", {reader_id}, \"{dt_now}\");
         """)
     else:
-        cursor.execute(f""" DELETE FROM Books_Bought 
-                WHERE book_id = {book_id} and reader_id = {reader_id};
+        cursor.execute(f"""
+            DELETE FROM Books_Bought 
+            WHERE book_id = \"{book_id}\" and reader_id = {reader_id};
         """)
     db.get_db().commit()
     the_response = make_response()
