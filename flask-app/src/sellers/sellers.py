@@ -11,11 +11,11 @@ def getBookSubmissions(sellerID):
     seller_id = int(sellerID)
     query = f"""
         SELECT B.ISBN,
-               B.title,
-               B.year,
+               B.title as Title,
+               B.year as Year,
                B.publisher_name as Publisher,
-               CONCAT(A.firstName, ' ', A.lastName) as authorName,
-               BS.accepted
+               CONCAT(A.firstName, ' ', A.lastName) as Author,
+               BS.accepted as 'Accepted?'
         FROM Books as B
         JOIN Authors A on B.writer_id = A.id
         JOIN Book_Submissions BS on B.isbn = BS.book_id 
