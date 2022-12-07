@@ -1,3 +1,8 @@
+# CS3200 Final Project Repo
+This repo represents the backend codebase for the Fall 2022 final project of the CS3200 Class at Northeastern University,
+written by Michael Huang, John Henry Rudden, and Andrew Yuan.
+Below, you can find out how to setup the project as well as a video highlighting the final application demo. 
+
 # MySQL + Flask Boilerplate Project
 
 This repo contains a boilerplate setup for spinning up 2 docker containers: 
