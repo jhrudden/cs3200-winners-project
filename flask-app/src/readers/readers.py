@@ -127,3 +127,31 @@ def buy_or_sell():
     the_response.status_code = 200
     return the_response
 
+@readers.route('/save-or-discard', methods=['PUT'])
+def save_or_discard():
+    cursor = db.get_db().cursor()
+    reader_id = int(request.form['reader_id'])
+    book_id = request.form['book_id']
+    current_app.logger.info(f"save_or_discard({reader_id}, {book_id}) -> NONE")
+    cursor.execute(f"""SELECT * FROM Reading_List 
+            where reader_id = {reader_id} and book_id = {book_id};
+    """)
+    save_status = cursor.fetchall()
+    current_app.logger.info(f"book is {save_status}")
+    if not(save_status):
+        cursor.execute(f"""
+            INSERT INTO Reading_List
+              (book_id, reader_id)
+            VALUES
+              (\"{book_id}\", {reader_id});
+        """)
+    else:
+        cursor.execute(f"""
+            DELETE FROM Reading_List 
+            WHERE book_id = \"{book_id}\" and reader_id = {reader_id};
+        """)
+    db.get_db().commit()
+    the_response = make_response()
+    the_response.status_code = 200
+    return the_response
+
