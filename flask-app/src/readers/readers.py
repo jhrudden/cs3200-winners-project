@@ -41,7 +41,8 @@ def get_book_list(readerID):
                CONCAT(A.firstName, ' ', A.lastName) as Author,
                (BB.date_bought IS NOT NULL) as 'Bought?',
                (RL.reader_id is NOT NULL) as 'Saved?',
-               RA.score as Review
+               RA.score as Rating,
+               RA.comments as Review
         FROM Books B
         LEFT OUTER JOIN (SELECT * FROM Reading_List where reader_id = {reader_id}) as RL
             on RL.book_id = B.ISBN
@@ -67,7 +68,8 @@ def get_recommendations(readerID):
            CONCAT(A.firstName, ' ', A.lastName) as Author,
            (BB.date_bought IS NOT NULL) as 'Bought?',
            (RL.reader_id is NOT NULL) as 'Saved?',
-           RA.score as Review
+           RA.score as Rating,
+           RA.comments as Review
         FROM Recommendations Rec
         Join Books B on Rec.book_id = B.ISBN
         LEFT OUTER JOIN (SELECT * FROM Reading_List where reader_id = {reader_id}) as RL
