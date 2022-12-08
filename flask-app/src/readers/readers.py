@@ -108,7 +108,7 @@ def buy_or_sell():
     cursor.execute(f"""SELECT * FROM Books_Bought 
             where reader_id = {reader_id} and book_id = {book_id};
     """)
-    buy_status = cursor.fetchall();
+    buy_status = cursor.fetchall()
     current_app.logger.info(f"book is {buy_status}")
     if not(buy_status):
         cursor.execute(f"""

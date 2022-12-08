@@ -28,10 +28,12 @@ def create_app():
     from src.readers.readers import readers
     from src.sellers.sellers import sellers
     from src.login.login import login
+    from src.curators.curators import curators
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(readers,    url_prefix='/readers')
     app.register_blueprint(sellers,    url_prefix='/sellers')
     app.register_blueprint(login,      url_prefix='/login')
+    app.register_blueprint(curators,      url_prefix='/curators')
 
     return app
