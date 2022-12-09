@@ -72,8 +72,8 @@ def add_book():
           (\'{isbn}\', {year}, {writerId}, \'{title}\', \'{publisher}\', {genreId}, false);
     """)
     cursor.execute(f"""
-        INSERT INTO Book_Submissions (book_id, seller_id, accepted)
-        VALUES (\'{isbn}\', {seller_id}, false);
+        INSERT INTO Book_Submissions (book_id, seller_id)
+        VALUES (\'{isbn}\', {seller_id});
     """)
     db.get_db().commit()
     the_response = make_response()

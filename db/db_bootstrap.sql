@@ -92,7 +92,7 @@ CREATE TABLE Book_Submissions (
   book_id VARCHAR(255) NOT NULL,
   seller_id INT NOT NULL,
   date_added DATE DEFAULT (CURRENT_DATE),
-  accepted BOOLEAN NOT NULL,
+  accepted BOOLEAN DEFAULT NULL,
   PRIMARY KEY (book_id, seller_id),
   CONSTRAINT bs_fk1 FOREIGN KEY (book_id) REFERENCES Books (ISBN)
     ON UPDATE cascade ON DELETE restrict,
