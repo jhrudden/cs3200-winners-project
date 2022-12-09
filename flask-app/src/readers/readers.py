@@ -108,7 +108,7 @@ def buy_or_sell():
     dt_now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     current_app.logger.info(f"buy_or_sell({reader_id}, {book_id}) -> NONE")
     cursor.execute(f"""SELECT * FROM Books_Bought 
-            where reader_id = {reader_id} and book_id = {book_id};
+            where reader_id = {reader_id} and book_id = \"{book_id}\";
     """)
     buy_status = cursor.fetchall()
     current_app.logger.info(f"book is {buy_status}")
@@ -136,7 +136,7 @@ def save_or_discard():
     book_id = request.form['book_id']
     current_app.logger.info(f"save_or_discard({reader_id}, {book_id}) -> NONE")
     cursor.execute(f"""SELECT * FROM Reading_List 
-            where reader_id = {reader_id} and book_id = {book_id};
+            where reader_id = {reader_id} and book_id = \"{book_id}\";
     """)
     save_status = cursor.fetchall()
     current_app.logger.info(f"book is {save_status}")
