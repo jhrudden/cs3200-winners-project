@@ -36,6 +36,8 @@ docker-compose.yml file.
 To shutdown the containers, simply 'ctrl+c' the running process and run ```docker-compose down``` to delete the containers from
 docker desktop.
 
+In the Appsmith, update the datasource with the name WinnersApi to have the frontend application work.
+
 
 
 
