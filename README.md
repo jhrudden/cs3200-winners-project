@@ -12,7 +12,7 @@ EZBooks has 3 main functions:
 
 # Project Video Demo
 Here is a link to a Youtube Video featuring a demo of our project's application.\
---> [link] <--
+--> https://drive.google.com/file/d/18RvOoVwJoRziFIhAec7rmINdj-S5185J/view?ts=63965fbe <--
 
 # Features
 This repo contains 2 docker containers: 
