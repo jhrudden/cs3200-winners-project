@@ -29,10 +29,12 @@ To setup the backend code for EZBooks, add the following password files to /secr
 
 This application runs on Docker containers. Install docker desktop here: https://docs.docker.com/get-docker/
 
-Once this setup is complete, run '''docker-compose up --build''' to build the docker containers. The current backend puts the main
+Once this setup is complete, run ```docker-compose up --build``` to build the docker containers. The current backend puts the main
 application on port 8001 and the database on port 3200. Make sure to change these values if necessary. This can be done in the 
 docker-compose.yml file.
 
+To shutdown the containers, simply 'ctrl+c' the running process and run ```docker-compose down``` to delete the containers from
+docker desktop.
 
 
 
