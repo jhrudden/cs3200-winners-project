@@ -171,6 +171,8 @@ insert into Authors (firstName, lastName) values ('Reggie', 'Macvain');
 insert into Authors (firstName, lastName) values ('Theresita', 'Gulliver');
 insert into Authors (firstName, lastName) values ('Alecia', 'Medlar');
 insert into Authors (firstName, lastName) values ('Kelwin', 'Riley');
+insert into Authors (firstName, lastName) values ('Null', 'Book');
+
 
 
 # ---------------- Curators ----------------
@@ -368,6 +370,13 @@ VALUES
   ('5345795622', 2001, 48, 'November Man, The', 'Gutkowski LLC', 10),
   ('4263866611', 2005, 49, 'Diary of a Cannibal', 'Auer Inc', 11),
   ('1552041778', 1999, 50, 'Jane Doe', 'Mira Books', 3);
+  
+INSERT INTO Books
+  (ISBN, year, writer_id, title, publisher_name, genre_id, visible)
+VALUES
+  ('0000000001', 2000, 1, 'test1', 'pub', 1, false),
+  ('0000000002', 2000, 1, 'test2', 'pub', 1, false),
+  ('0000000003', 2000, 1, 'test2', 'pub', 1, false);
 
 # ---------------- Readers ----------------
 INSERT INTO Readers
@@ -881,6 +890,10 @@ insert into Book_Submissions (book_id, seller_id, date_added, accepted) values (
 insert into Book_Submissions (book_id, seller_id, date_added, accepted) values ('5345795622', 48, '2022-03-28', true);
 insert into Book_Submissions (book_id, seller_id, date_added, accepted) values ('4263866611', 49, '2022-08-13', true);
 insert into Book_Submissions (book_id, seller_id, date_added, accepted) values ('1552041778', 50, '2022-05-07', true);
+
+insert into Book_Submissions (book_id, seller_id) values ('0000000001', 1);
+insert into Book_Submissions (book_id, seller_id) values ('0000000002', 1);
+insert into Book_Submissions (book_id, seller_id) values ('0000000003', 1);
 
 # ---------------- Recommendations  ----------------
 insert into Recommendations (book_id, curator_id) values ('4414162338', 35);
