@@ -3,6 +3,10 @@ This repo represents the backend codebase for the Fall 2022 final project of the
 written by Michael Huang, John Henry Rudden, and Andrew Yuan.
 Below, you can find out how to setup the project as well as a video highlighting the final application demo. 
 
+# Project Video Demo
+Here is a link to a Youtube Video featuring a demo of our project's application.  
+--> [link] <--
+
 # MySQL + Flask Boilerplate Project
 
 This repo contains a boilerplate setup for spinning up 2 docker containers: 
