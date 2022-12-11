@@ -19,7 +19,7 @@ This repo contains 2 docker containers:
 1. A MySQL 8 container
 1. A Python Flask container to implement a REST API  
 
-Our API is exposed to the public internet via nGrok. A AppSmith Application connects to this API and forms a UI for our project.\
+Our API is exposed to the public internet via nGrok. An AppSmith Application connects to this API and contains the UI for our project.\
 For more information about this process, please view our demo video above.
 
 
