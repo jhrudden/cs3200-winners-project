@@ -10,7 +10,6 @@ EZBooks has 3 main functions:
 1. Curators can add new books to the EZBooks database and recommend books to readers.
 1. Sellers can submit new books to the EZBooks database and view trends in the popularity of certain books.
 
-
 # Project Video Demo
 Here is a link to a Youtube Video featuring a demo of our project's application.\
 --> [link] <--
@@ -19,6 +18,7 @@ Here is a link to a Youtube Video featuring a demo of our project's application.
 This repo contains 2 docker containers: 
 1. A MySQL 8 container
 1. A Python Flask container to implement a REST API  
+
 Our API is exposed to the public internet via nGrok. A AppSmith Application connects to this API and forms a UI for our project.\
 For more information about this process, please view our demo video above.
 
