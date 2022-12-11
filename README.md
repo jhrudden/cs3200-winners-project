@@ -22,6 +22,19 @@ This repo contains 2 docker containers:
 Our API is exposed to the public internet via nGrok. An AppSmith Application connects to this API and contains the UI for our project.\
 For more information about this process, please view our demo video above.
 
+# Setup + Startup
+To setup the backend code for EZBooks, add the following password files to /secrets/ and fill them with a password:
+ - db_password.txt
+ - db_root_password.txt
+
+This application runs on Docker containers. Install docker desktop here: https://docs.docker.com/get-docker/
+
+Once this setup is complete, run '''docker-compose up --build''' to build the docker containers. The current backend puts the main
+application on port 8001 and the database on port 3200. Make sure to change these values if necessary. This can be done in the 
+docker-compose.yml file.
+
+
+
 
 
 
